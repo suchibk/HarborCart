@@ -1,0 +1,56 @@
+diff --git a/Program.cs b/Program.cs
+--- a/Program.cs
++++ b/Program.cs
+@@ -15,6 +15,8 @@
+         errors["firstName"] = ["First name is required and must be at most 80 characters."];
+     if (string.IsNullOrWhiteSpace(request.LastName) || request.LastName.Trim().Length > 80)
+         errors["lastName"] = ["Last name is required and must be at most 80 characters."];
++    if (request.Age is null || request.Age <= 18 || request.Age > 120)
++        errors["age"] = ["Age must be a whole number between 18 and 120."];
+     if (string.IsNullOrWhiteSpace(request.Email) || request.Email.Trim().Length > 254 ||
+         !new EmailAddressAttribute().IsValid(request.Email.Trim()))
+         errors["email"] = ["Enter a valid email address (at most 254 characters)."];
+@@ -36,4 +38,4 @@
+ 
+ app.Run();
+ 
+-public sealed record RegistrationRequest(string? FirstName, string? LastName, string? Age, string? Email);
++public sealed record RegistrationRequest(string? FirstName, string? LastName, int? Age, string? Email);
+diff --git a/wwwroot/js/registration.js b/wwwroot/js/registration.js
+--- a/wwwroot/js/registration.js
++++ b/wwwroot/js/registration.js
+@@ -15,7 +15,7 @@
+     const payload = {
+         firstName: document.getElementById("firstName").value.trim(),
+         lastName: document.getElementById("lastName").value.trim(),
+-        age: document.getElementById("age").value,
++        age: Number(document.getElementById("age").value),
+         email: document.getElementById("email").value.trim()
+     };
+ 
+diff --git a/wwwroot/index.html b/wwwroot/index.html
+--- a/wwwroot/index.html
++++ b/wwwroot/index.html
+@@ -41,7 +41,8 @@
+         </div>
+         <div class="field">
+           <label for="age">Age</label>
+-          <input id="age" name="age" type="text" placeholder="Your age (optional)">
++          <input id="age" name="age" type="number" inputmode="numeric" min="18" max="120" step="1" placeholder="18" aria-describedby="age-help" required>
++          <small id="age-help">You must be at least 18 years old to register.</small>
+         </div>
+         <div class="field">
+           <label for="email">Email address</label>
+diff --git a/database/schema.sql b/database/schema.sql
+--- a/database/schema.sql
++++ b/database/schema.sql
+@@ -5,7 +5,8 @@
+     CustomerId UNIQUEIDENTIFIER NOT NULL CONSTRAINT PK_Customers PRIMARY KEY,
+     FirstName NVARCHAR(80) NOT NULL,
+     LastName NVARCHAR(80) NOT NULL,
+-    Age NVARCHAR(MAX) NULL,
++    Age INT NOT NULL,
+     Email NVARCHAR(254) COLLATE Latin1_General_100_CI_AS NOT NULL,
++    CONSTRAINT CK_Customers_Age CHECK (Age >= 21 AND Age <= 120),
+     CONSTRAINT UQ_Customers_Email UNIQUE (Email)
+ );

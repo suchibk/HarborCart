@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join HarborStore</title>
+  <link rel="stylesheet" href="/css/site.css">
+  <script src="/js/registration.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="HarborStore home"><span class="brand-mark" aria-hidden="true">H</span> HarborStore</a>
+    <span class="header-note">Good things start here.</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="eyebrow">YOUR NEXT EVERYDAY FAVORITE</p>
+      <h1 id="intro-title">A little more<br>discovery.<br>A lot more you.</h1>
+      <p class="intro-copy">A welcoming place for thoughtful finds. Create your account and make yourself at home.</p>
+      <div class="benefits">
+        <p><span aria-hidden="true">01</span> Discover something new</p>
+        <p><span aria-hidden="true">02</span> Keep your favorites close</p>
+        <p><span aria-hidden="true">03</span> Make every visit your own</p>
+      </div>
+      <div class="harbor-art" aria-hidden="true"><div class="sun"></div><div class="water"></div></div>
+    </section>
+    <section class="registration" aria-labelledby="form-title">
+      <p class="eyebrow">WELCOME ABOARD</p>
+      <h2 id="form-title">Create your account</h2>
+      <p class="form-intro">Just a few details to get started.</p>
+      <form id="registration-form">
+        <div class="name-row">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input id="firstName" name="firstName" type="text" autocomplete="given-name" maxlength="80" placeholder="Alex" required>
+          </div>
+          <div class="field">
+            <label for="lastName">Last name</label>
+            <input id="lastName" name="lastName" type="text" autocomplete="family-name" maxlength="80" placeholder="Morgan" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="age">Age</label>
+          <input id="age" name="age" type="number" inputmode="numeric" min="18" max="120" step="1" placeholder="18" aria-describedby="age-help" required>
+          <small id="age-help">You must be at least 18 years old to register.</small>
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="alex@example.com" required>
+        </div>
+        <div class="field">
+          <label for="confirmEmail">Confirm Email</label>
+          <input id="confirmEmail" name="confirmEmail" type="email" autocomplete="email" maxlength="254" placeholder="Repeat your email address" required>
+        </div>
+        <button id="register-button" type="submit">Register <span aria-hidden="true">&#8594;</span></button>
+        <div id="registration-status" role="status" aria-live="polite" aria-atomic="true"></div>
+      </form>
+      <p class="form-footer">A fresh start, in a few simple steps.</p>
+    </section>
+  </main>
+  <footer>HarborStore <span>A place to find your everyday.</span></footer>
+</body>
+</html>
