@@ -15,7 +15,7 @@ app.MapPost("/api/registrations", (RegistrationRequest request) =>
         errors["firstName"] = ["First name is required and must be at most 80 characters."];
     if (string.IsNullOrWhiteSpace(request.LastName) || request.LastName.Trim().Length > 80)
         errors["lastName"] = ["Last name is required and must be at most 80 characters."];
-    if (request.Age is null || request.Age <= 18 || request.Age > 120)
+    if (request.Age is null || request.Age < 18 || request.Age > 120)
         errors["age"] = ["Age must be a whole number between 18 and 120."];
     if (string.IsNullOrWhiteSpace(request.Email) || request.Email.Trim().Length > 254 ||
         !new EmailAddressAttribute().IsValid(request.Email.Trim()))
