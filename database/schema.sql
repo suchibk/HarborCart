@@ -7,6 +7,6 @@ CREATE TABLE dbo.Customers
     LastName NVARCHAR(80) NOT NULL,
     Age INT NOT NULL,
     Email NVARCHAR(254) COLLATE Latin1_General_100_CI_AS NOT NULL,
-    CONSTRAINT CK_Customers_Age CHECK (Age >= 21 AND Age <= 120),
+    CONSTRAINT CK_Customers_Age CHECK (Age >= 18 AND Age <= 120),
     CONSTRAINT UQ_Customers_Email UNIQUE (Email)
 );
